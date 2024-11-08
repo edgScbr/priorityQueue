@@ -1,11 +1,11 @@
 package positionalList;
 
-public class LinkedPositionalList<E> implements PositionalList<E>{
+public class LinkedPositionalList<E> implements PositionalList<E> {
 
     private static class Node<E> implements Position<E> {
-        private E element;      // Reference of the element stored at this node
-        private Node<E> prev;   // Reference
-        private Node<E> next;
+        private E element;      // Referencia del elemento almacenado en este nodo
+        private Node<E> prev;   // Referencia al nodo anterior
+        private Node<E> next;   // Referencia al nodo siguiente
 
         public Node(E element, Node<E> prev, Node<E> next) {
             this.element = element;
@@ -15,10 +15,10 @@ public class LinkedPositionalList<E> implements PositionalList<E>{
 
         @Override
         public E getElement() throws IllegalStateException {
-           if(next == null) {
-               throw new IllegalStateException("Position no longer valid");
-           }
-           return element;
+            if (next == null) {
+                throw new IllegalStateException("La posición ya no es válida");
+            }
+            return element;
         }
 
         public Node<E> getPrev() {
@@ -40,41 +40,40 @@ public class LinkedPositionalList<E> implements PositionalList<E>{
         public void setElement(E element) {
             this.element = element;
         }
-    } // End of nested Node class
+    } // Fin de la clase anidada Node
 
-    // Instance variables of the LinkedPositionalList
-    private Node<E> header;     // Header sentinel
-    private Node<E> trailer;    // Trailer sentinel
-    private int size = 0;       // Number of elements in the list
+    // Variables de instancia de LinkedPositionalList
+    private Node<E> header;     // Centinela de inicio
+    private Node<E> trailer;    // Centinela de fin
+    private int size = 0;       // Número de elementos en la lista
 
-
-    // Constructs a new empty list
+    // Construye una nueva lista vacía
     public LinkedPositionalList() {
-        header = new Node<>(null, null, null);  // create header
-        trailer = new Node<>(null, header, null);    // trailer is preceded by header
-        header.setNext(trailer);                                  // header is followed by trailer
+        header = new Node<>(null, null, null);          // crea el centinela de inicio
+        trailer = new Node<>(null, header, null);       // el centinela de fin sigue al de inicio
+        header.setNext(trailer);                        // el centinela de inicio es seguido por el de fin
     }
 
-    // Validates the position and returns it as node
+    // Valida la posición y la devuelve como nodo
     private Node<E> validate(Position<E> p) throws IllegalArgumentException {
-        if(!(p instanceof Node<E>)) throw new IllegalArgumentException("Invalid position");
-        Node<E> node = (Node<E>) p; // Safe cast
-        if(node.getNext() == null)
-            throw new IllegalArgumentException("p is no longer in the list");
+        if (!(p instanceof Node<E>)) throw new IllegalArgumentException("Posición no válida");
+        Node<E> node = (Node<E>) p; // Conversión segura
+        if (node.getNext() == null)
+            throw new IllegalArgumentException("p ya no está en la lista");
         return node;
     }
 
-    // Returns the given node as a position (or null if it is a sentinel)
+    // Devuelve el nodo dado como una posición (o null si es un centinela)
     private Position<E> position(Node<E> node) {
-        if(node == header || node == trailer) {
-            return null;    // Do not expose user to sentinels
+        if (node == header || node == trailer) {
+            return null;    // No exponer los centinelas al usuario
         }
         return node;
     }
 
-    // Adds element e to the linked list between the given nodes
+    // Agrega el elemento e a la lista enlazada entre los nodos dados
     private Position<E> addBetween(E e, Node<E> pred, Node<E> succ) {
-        Node<E> newest = new Node<>(e, pred, succ); // Create and link new node
+        Node<E> newest = new Node<>(e, pred, succ); // Crea y enlaza el nuevo nodo
         pred.setNext(newest);
         succ.setPrev(newest);
         size++;
@@ -154,7 +153,7 @@ public class LinkedPositionalList<E> implements PositionalList<E>{
         E answer = node.getElement();
         node.setElement(null);
         node.setNext(null);
-        node.setPrev(null)  ;
+        node.setPrev(null);
         return answer;
     }
 }

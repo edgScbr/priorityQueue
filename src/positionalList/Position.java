@@ -2,6 +2,6 @@ package positionalList;
 
 public interface Position<E> {
 
-    // Returns the element stored at this position
+    // Regresa el elemento guardado en esta posicion
     E getElement() throws IllegalStateException;
 }

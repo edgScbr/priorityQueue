@@ -8,38 +8,38 @@ import java.util.Comparator;
 
 public class SortedPriorityQueue<K, V> extends AbstractPriorityQueue<K, V> {
 
-    // Primary Collection of priority queue entries
+    // Colección principal de entradas de la cola de prioridad
     private PositionalList<Entry<K, V>> list = new LinkedPositionalList<>();
 
-    // Creates an empty priority queue based on the natural ordering of its keys
+    // Crea una cola de prioridad vacía basada en el orden natural de sus llaves
     public SortedPriorityQueue() {
         super();
     }
 
-    // Creates an empty priority queue using the given comparator to order keys
+    // Crea una cola de prioridad vacía usando el comparador dado para ordenar las llaves
     public SortedPriorityQueue(Comparator<K> comp) {
         super();
     }
 
-    // Inserts a key-value pair and returns the entry created
+    // Inserta un par clave-valor y devuelve la entrada creada
     @Override
     public Entry<K, V> insert(K key, V value) throws IllegalArgumentException {
-        checkKey(key);      // auxiliary key-checking method (could throw exception)
+        checkKey(key);      // método auxiliar para verificar la clave (podría lanzar una excepción)
         Entry<K, V> newest = new PQEntry<>(key, value);
         Position<Entry<K, V>> walk = list.last();
-        // Walk backward, looking for smaller key
+        // Retrocede buscando una clave menor
         while (walk != null && compare(newest, walk.getElement()) < 0) {
             walk = list.before(walk);
         }
         if (walk == null) {
-            list.addFirst(newest);          // New key is smallest
+            list.addFirst(newest);          // La nueva clave es la más pequeña
         } else {
-            list.addAfter(walk, newest);    // Newest goes after walk
+            list.addAfter(walk, newest);    // La nueva entrada va después de walk
         }
         return newest;
     }
 
-    // Returns (but does not remove) an entry with minimal key
+    // Devuelve (pero no elimina) una entrada con la clave mínima
     @Override
     public Entry<K, V> min() {
         if (list.isEmpty()) {

@@ -10,24 +10,24 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("1. Add Process");
-            System.out.println("2. Execute Process");
-            System.out.println("3. Display Queue");
-            System.out.println("4. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.println("1. Agregar Proceso");
+            System.out.println("2. Ejecutar Proceso");
+            System.out.println("3. Mostrar Elementos en Cola");
+            System.out.println("4. Salir");
+            System.out.print("Ingrese su elección: ");
 
             try {
                 int choice = scanner.nextInt();
-                scanner.nextLine();  // Consume newline after nextInt()
+                scanner.nextLine();  // Consumir nueva línea después de nextInt()
 
                 switch (choice) {
                     case 1:
-                        // Adding a new process
-                        System.out.print("Enter Process ID: ");
+                        // Agregando un nuevo proceso
+                        System.out.print("Ingrese el Nombre del Proceso: ");
                         String processId = scanner.nextLine();
 
-                        int priority = getValidIntegerInput(scanner, "Enter Process Priority (integer): ");
-                        int burstTime = getValidIntegerInput(scanner, "Enter Process Burst Time (in ms): ");
+                        int priority = getValidIntegerInput(scanner, "Ingrese la Prioridad del Proceso (entero): ");
+                        int burstTime = getValidIntegerInput(scanner, "Ingrese el Tiempo de Rafaga del Proceso (en ms): ");
 
                         Process process = new Process(processId, burstTime);
                         scheduler.addProcess(priority, process);
@@ -42,36 +42,35 @@ public class Main {
                         break;
 
                     case 4:
-                        System.out.println("Exiting...");
+                        System.out.println("Saliendo...");
                         scanner.close();
                         System.exit(0);
                         break;
 
                     default:
-                        System.out.println("Invalid choice. Please try again.");
+                        System.out.println("Opción no válida. Por favor, intente de nuevo.");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input! Please enter a valid number.");
-                scanner.nextLine();  // Clear the invalid input
+                System.out.println("¡Entrada no válida! Por favor, ingrese un número válido.");
+                scanner.nextLine();  // Limpiar la entrada no válida
             }
         }
     }
 
-    // Helper method to get a valid integer input with error handling
+    // Método auxiliar para obtener una entrada de número entero válida con manejo de errores
     private static int getValidIntegerInput(Scanner scanner, String prompt) {
         int number;
         while (true) {
             System.out.print(prompt);
             try {
                 number = scanner.nextInt();
-                scanner.nextLine();  // Consume the newline
-                break;  // Break out of the loop if a valid integer is entered
+                scanner.nextLine();  // Consumir nueva línea
+                break;  // Salir del bucle si se ingresa un entero válido
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input! Please only numbers are allowed.");
-                scanner.nextLine();  // Clear the invalid input
+                System.out.println("¡Entrada no válida! Solo se permiten números.");
+                scanner.nextLine();  // Limpiar la entrada no válida
             }
         }
         return number;
     }
 }
-

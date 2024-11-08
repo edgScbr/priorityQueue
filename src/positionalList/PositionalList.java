@@ -2,39 +2,39 @@ package positionalList;
 
 public interface PositionalList<E> {
 
-    // Returns the number of elements in the list
+    // Devuelve el número de elementos en la lista
     int size();
 
-    // Checks whether the list is empty
+    // Verifica si la lista está vacía
     boolean isEmpty();
 
-    // Returns the first position in the list (or null if empty)
+    // Devuelve la primera posición en la lista (o null si está vacía)
     Position<E> first();
 
-    // Returns the last position in the list (or null if empty)
+    // Devuelve la última posición en la lista (o null si está vacía)
     Position<E> last();
 
-    // Returns the position immediately before position p (or null if p is first)
+    // Devuelve la posición inmediatamente anterior a la posición p (o null si p es la primera)
     Position<E> before(Position<E> p) throws IllegalArgumentException;
 
-    // Returns the position immediately after  position p (or null if p is last)
+    // Devuelve la posición inmediatamente después de la posición p (o null si p es la última)
     Position<E> after(Position<E> p) throws IllegalArgumentException;
 
-    // Inserts element e at the front of the list and returns its new position
+    // Inserta el elemento e al frente de la lista y devuelve su nueva posición
     Position<E> addFirst(E e);
 
-    // Inserts element e at the back  of the list and returns its new position
+    // Inserta el elemento e al final de la lista y devuelve su nueva posición
     Position<E> addLast(E e);
 
-    // Inserts element e immediately before position p and returns its new position
+    // Inserta el elemento e inmediatamente antes de la posición p y devuelve su nueva posición
     Position<E> addBefore(Position<E> p, E e) throws IllegalArgumentException;
 
-    // Inserts element e immediately after position p and returns its new position
+    // Inserta el elemento e inmediatamente después de la posición p y devuelve su nueva posición
     Position<E> addAfter(Position<E> p, E e) throws IllegalArgumentException;
 
-    // Replaces the element stored at position p and returns the replaced element.
+    // Reemplaza el elemento almacenado en la posición p y devuelve el elemento reemplazado
     E set(Position<E> p, E e) throws IllegalArgumentException;
 
-    // Removes the element stored at position p and returns it (invalidating p)
+    // Elimina el elemento almacenado en la posición p y lo devuelve (invalidando p)
     E remove(Position<E> p) throws IllegalArgumentException;
 }

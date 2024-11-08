@@ -2,7 +2,7 @@ package processImplementation;
 
 public class Process {
     private String name;
-    private int burstTime;  // Time required for the process to complete
+    private int burstTime;  // Tiempo requerido para que el proceso sea completado
 
     public Process(String name, int burstTime) {
         this.name = name;
